@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+    />
+    <style>
+      /*=============== VARIABLES ===============*/
+
+      :root {
+        --bg-primary: #fff;
+        --bg-secondary: #f6f8fa;
+        --foreground: #000;
+        --accent-color: #09f;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-primary: #292c4a;
+          --bg-secondary: #181a2ee1;
+          --foreground: #fff;
+          --accent-color: #6ac3ff;
+        }
+      }
+
+      /*=============== BASE ===============*/
+
+      * {
+        font-family: 'Montserrat', sans-serif;
+        color: var(--foreground);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg-primary);
+        margin: 0;
+      }
+
+      blockquote {
+        margin: 0;
+        padding: 0.5em 1em;
+        border-left: 5px solid var(--accent-color);
+        background: var(--bg-secondary);
+      }
+
+      em {
+        padding: 0.1em 0.5em;
+        background: var(--bg-secondary);
+        border-radius: 5px;
+      }
+
+      h1 {
+        font-size: 2em;
+        margin-bottom: 0;
+        margin-top: 0.5em;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        position: relative;
+      }
+
+      h1:hover > .anchor,
+      h2:hover > .anchor,
+      h3:hover > .anchor,
+      h4:hover > .anchor,
+      h5:hover > .anchor,
+      h6:hover > .anchor {
+        opacity: 1;
+      }
+
+      .anchor {
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+
+      .anchor::before {
+        content: '#';
+        position: absolute;
+        top: 0;
+        left: -1em;
+        color: var(--accent-color);
+      }
+
+      a {
+        color: var(--accent-color);
+      }
+
+      p {
+        line-height: 1.5;
+      }
+
+      main {
+        display: flex;
+      }
+
+      .container {
+        display: grid;
+        place-items: center;
+        padding: 0 1em;
+        overflow-y: auto;
+        width: 100%;
+        height: 100vh;
+      }
+
+      .container > section {
+        max-width: 768px;
+      }
+
+      @media (min-width: 1080px) {
+        .container > section {
+          padding-top: 2em;
+        }
+      }
+
+      .btn {
+        display: none;
+      }
+
+      @media (max-width: 1080px) {
+        .btn {
+          width: 48px;
+          height: 48px;
+          margin-top: 1em;
+          background: var(--bg-secondary);
+          border-radius: 10px;
+          border: 0;
+          padding: 0.5em;
+          display: block;
+        }
+
+        .active {
+          transform: translateX(calc(100% - 2em));
+        }
+      }
+
+      /*=============== NAVBAR ===============*/
+
+      nav {
+        background: var(--bg-secondary);
+        backdrop-filter: blur(5px);
+        overflow: hidden;
+        transition: transform 0.5s ease;
+        width: 350px;
+        height: 100vh;
+      }
+
+      @media (max-width: 1080px) {
+        nav {
+          --size: calc(100% - 2em);
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: calc(var(--size) * -1);
+          width: 100%;
+        }
+      }
+
+      nav ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      nav li {
+        position: relative;
+        display: block;
+      }
+
+      nav a:hover {
+        border-left-color: var(--accent-color);
+        font-weight: 600;
+      }
+
+      nav a {
+        border-left: 4px solid transparent;
+      }
+
+      .nav-link {
+        position: relative;
+        font-size: 16px;
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+      }
+
+      .nav-header {
+        margin: 20px;
+        font-size: 1.5em;
+        font-weight: 600;
+      }
+
+      /*=============== ARTICLES ===============*/
+
+      header {
+        font-size: 2em;
+        font-weight: 600;
+        margin-top: 2em;
+      }
+
+      article {
+        font-size: 16px;
+        line-height: 2;
+      }
+
+      /*=============== CODE SECTIONS ===============*/
+
+      code {
+        background: #181a2e88;
+        border-radius: 5px;
+        color: var(--accent-color);
+        page-break-inside: avoid;
+        font-family: monospace;
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 1.6em;
+        max-width: 100%;
+        padding: 1em 1.5em;
+        display: block;
+        word-wrap: break-word;
+      }
+
+      /*=============== SCROLLBAR ===============*/
+
+      ::-webkit-scrollbar {
+        width: 0.5em;
+      }
+
+      ::-webkit-scrollbar-track {
+        background-color: var(--bg-secondary);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: var(--accent-color);
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav id="navbar">
+        <header class="nav-header">Cuarzo Documentation</header>
+        <ul>
+          {{index}}
+        </ul>
+      </nav>
+      <div class="container">
+        <section>
+          <button class="btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <g>
+                <path
+                  d="M5 17H13M5 12H19M5 7H13"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+            </svg>
+          </button>
+          {{content}}
+        </section>
+      </div>
+    </main>
+
+    <script defer>
+      ;((d) => {
+        d.querySelector('.btn').addEventListener('click', () => {
+          d.querySelector('#navbar').classList.toggle('active')
+        })
+        d.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach((title) => {
+          const anchor = d.createElement('a')
+          anchor.classList.add('anchor')
+          anchor.href = '#' + title.id
+          title.appendChild(anchor)
+        })
+      })(document)
+    </script>
+  </body>
+</html>

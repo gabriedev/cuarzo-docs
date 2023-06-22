@@ -1,0 +1,17 @@
+{
+  "name": "cuarzo-docs",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node main.js",
+    "dev": "nodemon main.js -e md,js,html --ignore build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wcj/markdown-to-html": "2.2.1",
+    "glob": "10.2.6",
+    "nodemon": "2.0.22"
+  }
+}
